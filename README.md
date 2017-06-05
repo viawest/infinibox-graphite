@@ -4,14 +4,14 @@ Grafana dashboards have been provided to allow visualization of the data.
 
 ## Getting Started
 There are three main functions that are required to setup this monitoring solution. Those functions are data collection, 
-data storage, and data visualization. All three functions can be served by a single server or you can have a single
-server for each function. We decided to go with the latter.
+storage, and visualization. All three functions can be served by a single server or you can have a single server for each 
+function. We decided to go with the latter.
 
-For the data collector, we use a Windows server that schedules the execution of these scripts. The scripts are responsible
-for retrieving data from the InfiniBox storage arrays and Infinimetrics servers and then sends that data to our data
-storage server. The data storage server is a Linux server running the time series database(TSDB) Graphite. While Graphite
-does provide visualization capabilities, it is rudimentary in comparison to what Grafana offers. Grafana allows for easy
-customization of dashboards and works across many different TSDBs.
+For the data collector, we use a Windows server that schedules the execution of the scripts in this repository. The 
+scripts are responsible for retrieving data from the InfiniBox storage arrays and Infinimetrics servers and forwards 
+the data to our data storage server. The data storage server is a Linux server running the time series database(TSDB) 
+Graphite. While Graphite does provide visualization capabilities, it is ver basic. We decided to use Grafana for our
+data visualization platform. Grafana allows for easy customization of dashboards and works across many different TSDBs.
 
 ## Requirements
 * Infinimetrics 3.0.1 and newer
