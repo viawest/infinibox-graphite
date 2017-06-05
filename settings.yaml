@@ -1,0 +1,13 @@
+---
+# site specific Graphite configuration
+site01:
+    graphite_address: "hostname1.site01.domain.com"
+    graphite_port: 2003
+    graphite_prefix: "infinibox.site01"
+    graphite_timeout: 10
+
+site02:
+    graphite_address: "hostname2.site02.domain.com"
+    graphite_port: 2003
+    graphite_prefix: "infinibox.site02"
+    graphite_timeout: 10
