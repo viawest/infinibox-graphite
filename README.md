@@ -3,7 +3,7 @@ This project provides several Python scripts used to send InfiniBox operational 
 Grafana dashboards have been provided to allow visualization of the data.
 
 ## Getting Started
-There are three main functions that are required to setup this monitoring solution. Those functions are data collection, 
+There are three main functions that are required to setup a monitoring solution. Those functions are data collection, 
 storage, and visualization. All three functions can be served by a single server or you can have a single server for each 
 function. We decided to go with the latter.
 
