@@ -2,7 +2,7 @@
 This project provides several Python scripts used to send InfiniBox operational data to Graphite. In addition, several 
 Grafana dashboards have been provided to allow visualization of the data.
 
-## Getting Started
+## Overview
 There are three main functions that are required to setup a monitoring solution. Those functions are data collection, 
 storage, and visualization. All three functions can be served by a single server or you can have a single server for each 
 function. We decided to go with the latter.
@@ -12,6 +12,11 @@ scripts are responsible for retrieving data from the InfiniBox storage arrays an
 the data to our data storage server. The data storage server is a Linux server running the time series database(TSDB) 
 Graphite. While Graphite does provide visualization capabilities, it is ver basic. We decided to use Grafana for our
 data visualization platform. Grafana allows for easy customization of dashboards and works across many different TSDBs.
+
+Infinimetrics is required as part of this solution to provide the workload statistics. The InfiniBox and Infinimetrics
+store workload statitistics a little differently. The InfiniBox maintains forever incrementing values for IOPS, 
+throughput, and latency while Infinimetrics stores the actual per second values. I preferred getting the actual data from 
+Infinimetrics as opposed to having to derive the data from the difference between two datapoints on the InfiniBox. 
 
 ## Requirements
 * Infinimetrics 3.0.1 and newer
