@@ -10,7 +10,7 @@ function. We decided to go with the latter.
 For the data collector, we use a Windows server that schedules the execution of the scripts in this repository. The 
 scripts are responsible for retrieving data from the InfiniBox storage arrays and Infinimetrics servers and forwards 
 the data to our data storage server. The data storage server is a Linux server running the time series database(TSDB) 
-Graphite. While Graphite does provide visualization capabilities, it is ver basic. We decided to use Grafana for our
+Graphite. While Graphite does provide visualization capabilities, it is very basic. We decided to use Grafana for our
 data visualization platform. Grafana allows for easy customization of dashboards and works across many different TSDBs.
 
 Infinimetrics is required as part of this solution to provide the workload statistics. The InfiniBox and Infinimetrics
