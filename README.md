@@ -76,11 +76,11 @@ The following list provides a brief description of the dashboards and their asso
   * **Space Allocated**: Physical\virtual space allocated within pools. Not physical\virtual size of all pools.
   * **Space Used**: (Physical allocation within pools) + (snapshots) + (clones)
   * **Space Available**: (Physical\virtual Capacity) - (Physical\virtual allocation)
-* **Cloud_Storage_Top_Offenders**: Top 5 hosts and volumes for each workload metric.
+* **Cloud_Storage_Top_Offenders.json**: Top 5 hosts and volumes for each workload metric.
   * **Top Volume\Host Read\Write Throughput**: Read\Write bytes/sec
   * **Top Volume\Hhost Read\Write IOPs**: Read\Write IOPs
   * **Top Volume\Host Read\Write Latency**: Read\Write latency(ms)
-* **Cloud_Storage_Space_All_Sites**: Aggregate virtual and physical space utilization for multiple locations/arrays.  
+* **Cloud_Storage_Space_All_Sites.json**: Aggregate virtual and physical space utilization for multiple locations/arrays.  
   * **InfiniBox Count**: Number of InfiniBox storage arrays being monitored
   * **InfiniBox List**: List of InfiniBox storage arrays being monitored. Format: site.hostname
   * **Virtual Capacity**: Virtual capacity
