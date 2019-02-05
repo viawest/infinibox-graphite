@@ -3,12 +3,16 @@ import requests
 import global_vars
 import sys
 import argparse
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 # exit codes
 OK       = 0
 WARNING  = 1
 CRITICAL = 2
 UNKNOWN  = 3
+
+# Disabled SSL certificate warnings for http api requests
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 def process_url(api_url, username, password, timeout, verbose):
@@ -24,6 +28,7 @@ def process_url(api_url, username, password, timeout, verbose):
 			# make request
             r.append(requests.get(
                 "%s" % (api_url[i]),
+                verify=False,
                 auth=(username, password),
                 timeout=timeout
             ))
