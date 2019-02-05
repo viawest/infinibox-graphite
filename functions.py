@@ -25,7 +25,7 @@ def process_url(api_url, username, password, timeout, verbose):
 
     while i < len(api_url):
         try:
-			# make request
+	    # make request
             r.append(requests.get(
                 "%s" % (api_url[i]),
                 verify=False,
@@ -37,34 +37,34 @@ def process_url(api_url, username, password, timeout, verbose):
             print "CRITICAL: Could not get data when querying the Infinibox (%s)" % (message)
             exit(CRITICAL)
 
-		# show raw results
+	# show raw results
         if verbose:
             print "Raw result:\n%s\n" % (r[i].text)
 
-		# exit if there was a bad status code
+	# exit if there was a bad status code
         if r[i].status_code != 200:
             print "r{}".format(i)
             print "CRITICAL: Could not get data when querying the Infinibox which returned (%d)" % (r[i].status_code)
             exit(CRITICAL)
 
-		# decode the json
+	# decode the json
         global_vars.result.append(r[i].json())
 
-		# show decoded json
+	# show decoded json
         if verbose:
             print "Decoded json:\n%s\n" % (pformat(global_vars.result[i]))
 
         state = 0
 
-		# build proper message
+	# build proper message
         state, message = build_response(state)
 
-		# override message and state if running in verbose mode
+	# override message and state if running in verbose mode
         if verbose:
             state = UNKNOWN
             message = "UNKNOWN:"
 
-		# evaluate returned data from API calls
+	# evaluate returned data from API calls
         global_vars.outcome.append(global_vars.result[i]["result"])
 
         i += 1
