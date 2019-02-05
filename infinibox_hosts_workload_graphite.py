@@ -19,6 +19,9 @@ import socket
 import yaml
 import functions
 import global_vars
+import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
 
 # define and gather command line options
 parser = functions.ArgumentParserEx(
@@ -115,7 +118,7 @@ username = options.username
 password = options.password
 timeout = options.timeout
 
-url_args = ["http://{}/api/rest/hosts?fields=name,id&page_size=1000".format(
+url_args = ["https://{}/api/rest/hosts?fields=name,id&page_size=1000".format(
     options.fqdn
     )]
 url_args.append("{}{}?{}".format(str(options.url), str(options.components), str(options.filters)))
@@ -145,6 +148,15 @@ for host in global_vars.outcome[0]:
                     entity_id["id"]
                     )
                 url_entity_id.append(monitor_entity_id)
+                '''
+                functions.process_url(
+                    url_args,
+                    options.username,
+                    options.password,
+                    options.timeout,
+                    options.verbose
+                    )
+                '''
 
 # clear the list
 del url_args[:]
@@ -152,7 +164,17 @@ del global_vars.outcome[:]
 
 # append infinimetrics api urls
 for url in url_entity_id:
-    url_args.append(url)
+    r = requests.get(
+        "%s" % (url),
+        verify=False,
+        auth=(username, password),
+        timeout=timeout
+    )
+    try:
+        print r.json()
+        url_args.append(url)
+    except ValueError:
+        print "Failed to decode JSON. Exluding URL."
 
 functions.process_url(
     url_args,
