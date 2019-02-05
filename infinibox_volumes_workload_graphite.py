@@ -18,6 +18,7 @@ import socket
 import yaml
 import functions
 import global_vars
+import requests
 
 # define and gather command line options
 parser = functions.ArgumentParserEx(
@@ -110,7 +111,7 @@ if options.verbose:
 	# restore password
 	options.password = password
 		
-url_args = ["http://{}/api/rest/volumes?fields=name,id&page_size=1000".format(
+url_args = ["https://{}/api/rest/volumes?fields=name,id&page_size=1000".format(
     options.fqdn
     )]
 url_args.append("{}{}?{}".format(
@@ -139,6 +140,15 @@ for vol in global_vars.outcome[0]:
             if vol["id"] == entity_id["id_in_system"]:
                 monitor_entity_id = "{}{}/{}/data/?format=json&page=last&page_size=1&sort=timestamp".format(options.url, options.components, entity_id["id"])
                 url_entity_id.append(monitor_entity_id)
+                '''
+                functions.process_url(
+                    url_args,
+                    options.username,
+                    options.password,
+                    options.timeout,
+                    options.verbose
+                    )
+                '''
 
 # clear the list
 del url_args[:]
@@ -146,7 +156,17 @@ del global_vars.outcome[:]
 
 # append infinimetrics api urls
 for url in url_entity_id:
-	url_args.append(url)
+    r = requests.get(
+        "%s" % (url),
+        verify=False,
+        auth=(options.username, options.password),
+        timeout=options.timeout
+    )
+    try:
+        print r.json()
+        url_args.append(url)
+    except ValueError:
+        print "Failed to decode JSON. Exluding URL."
 	
 functions.process_url(
     url_args,
