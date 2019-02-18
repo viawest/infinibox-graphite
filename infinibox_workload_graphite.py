@@ -19,6 +19,10 @@ import logging
 import socket
 import yaml
 import functions
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
+# Disabled SSL certificate warnings for http api requests
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # define and gather command line options
 parser = functions.ArgumentParserEx(
@@ -119,6 +123,7 @@ try:
 	# make request
 	r = requests.get(
 		"%s" % (url_args),
+		verify=False,
 		auth=(options.username, options.password),
 		timeout=options.timeout
 	)
