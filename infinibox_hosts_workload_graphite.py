@@ -22,6 +22,9 @@ import global_vars
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+# Disabled SSL certificate warnings for http api requests
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
 
 # define and gather command line options
 parser = functions.ArgumentParserEx(
